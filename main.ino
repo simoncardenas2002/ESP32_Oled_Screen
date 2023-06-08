@@ -28,7 +28,6 @@ char ub1[10];
 char ub2[10];
 char ub3[10];
 char ub4[10];
-char prueba[10];
 
 const int button_1 = 34; // the number of the pushbutton pin
 const int button_2 = 35;
@@ -580,24 +579,43 @@ void loop() {
       startTime_3 = millis();
       //display.clearDisplay();
     }
+    if(button_cont_2==0){
+      u8g2.firstPage();
+      do {
+        u8g2.drawStr(30,12,"Set Point");
+        u8g2.drawStr(0, 51, "B1");
+        u8g2.drawStr(32, 51, "B2");
+        u8g2.drawStr(64, 51, "B3");
+        u8g2.drawStr(96, 51, "B4");
+        u8g2.drawFrame(0, 16, 20, 20);
+        u8g2.drawFrame(32, 16, 20, 20);
+        u8g2.drawFrame(64, 16, 20, 20);
+        u8g2.drawFrame(96, 16, 20, 20);
+        u8g2.drawStr(3, 32, "0");
+        u8g2.drawStr(35, 32, "0");
+        u8g2.drawStr(67, 32, "0");
+        u8g2.drawStr(99, 32, "0");
+      }while ( u8g2.nextPage() );
+    }
     if(button_cont_2 ==1){
       //display.clearDisplay();
       u8g2.firstPage();
       do {
-        u8g2.drawStr(20,20,"Set Point");
-        u8g2.drawStr(0, 59, "B1");
-        u8g2.drawStr(32, 59, "b2");
-        u8g2.drawStr(64, 59, "b3");
-        u8g2.drawStr(96, 59, "b4");
-        u8g2.drawFrame(0, 24, 20, 20);
-        u8g2.drawFrame(32, 24, 20, 20);
-        u8g2.drawFrame(64, 24, 20, 20);
-        u8g2.drawFrame(96, 24, 20, 20);
+        u8g2.drawStr(30,12,"Set Point");
+        u8g2.drawStr(0, 51, "B1");
+        u8g2.drawStr(32, 51, "b2");
+        u8g2.drawStr(64, 51, "b3");
+        u8g2.drawStr(96, 51, "b4");
+        u8g2.drawFrame(0, 53,20, 3);
+        u8g2.drawFrame(0, 16, 20, 20);
+        u8g2.drawFrame(32, 16, 20, 20);
+        u8g2.drawFrame(64, 16, 20, 20);
+        u8g2.drawFrame(96, 16, 20, 20);
         itoa(cont_bat1,ub1,10);
-        u8g2.drawStr(3, 40, ub1);
-        u8g2.drawStr(35, 40, ub2);
-        u8g2.drawStr(67, 40, ub3);
-        u8g2.drawStr(99, 40, ub4);
+        u8g2.drawStr(3, 32, ub1);
+        u8g2.drawStr(35, 32, ub2);
+        u8g2.drawStr(67, 32, ub3);
+        u8g2.drawStr(99, 32, ub4);
         
       } while ( u8g2.nextPage() );
       if (buttonState_3 == HIGH & (millis()-startTime_4) > interval_4) {
@@ -616,20 +634,21 @@ void loop() {
     if(button_cont_2 == 2){
       u8g2.firstPage();
       do {
-        u8g2.drawStr(20,20,"Set Point");
-        u8g2.drawStr(0, 59, "b1");
-        u8g2.drawStr(32, 59, "B2");
-        u8g2.drawStr(64, 59, "b3");
-        u8g2.drawStr(96, 59, "b4");
-        u8g2.drawFrame(0, 24, 20, 20);
-        u8g2.drawFrame(32, 24, 20, 20);
-        u8g2.drawFrame(64, 24, 20, 20);
-        u8g2.drawFrame(96, 24, 20, 20);
+        u8g2.drawStr(30,12,"Set Point");
+        u8g2.drawStr(0, 51, "b1");
+        u8g2.drawStr(32, 51, "B2");
+        u8g2.drawStr(64, 51, "b3");
+        u8g2.drawStr(96, 51, "b4");
+        u8g2.drawFrame(32, 53,20, 3);
+        u8g2.drawFrame(0, 16, 20, 20);
+        u8g2.drawFrame(32, 16, 20, 20);
+        u8g2.drawFrame(64, 16, 20, 20);
+        u8g2.drawFrame(96, 16, 20, 20);
         itoa(cont_bat2,ub2,10);
-        u8g2.drawStr(3, 40, ub1);
-        u8g2.drawStr(35, 40, ub2);
-        u8g2.drawStr(67, 40, ub3);
-        u8g2.drawStr(99, 40, ub4);
+        u8g2.drawStr(3, 32, ub1);
+        u8g2.drawStr(35, 32, ub2);
+        u8g2.drawStr(67, 32, ub3);
+        u8g2.drawStr(99, 32, ub4);
         
       } while ( u8g2.nextPage() );
       if (buttonState_3 == HIGH & (millis()-startTime_4) > interval_4) {
@@ -647,20 +666,21 @@ void loop() {
     if(button_cont_2 == 3){
       u8g2.firstPage();
       do {
-        u8g2.drawStr(20,20,"Set Point");
-        u8g2.drawStr(0, 59, "b1");
-        u8g2.drawStr(32, 59, "b2");
-        u8g2.drawStr(64, 59, "B3");
-        u8g2.drawStr(96, 59, "b4");
-        u8g2.drawFrame(0, 24, 20, 20);
-        u8g2.drawFrame(32, 24, 20, 20);
-        u8g2.drawFrame(64, 24, 20, 20);
-        u8g2.drawFrame(96, 24, 20, 20);
+        u8g2.drawStr(30,12,"Set Point");
+        u8g2.drawStr(0, 51, "b1");
+        u8g2.drawStr(32, 51, "b2");
+        u8g2.drawStr(64, 51, "B3");
+        u8g2.drawStr(96, 51, "b4");
+        u8g2.drawFrame(64, 53,20, 3);
+        u8g2.drawFrame(0, 16, 20, 20);
+        u8g2.drawFrame(32, 16, 20, 20);
+        u8g2.drawFrame(64, 16, 20, 20);
+        u8g2.drawFrame(96, 16, 20, 20);
         itoa(cont_bat3,ub3,10);
-        u8g2.drawStr(3, 40, ub1);
-        u8g2.drawStr(35, 40, ub2);
-        u8g2.drawStr(67, 40, ub3);
-        u8g2.drawStr(99, 40, ub4);
+        u8g2.drawStr(3, 32, ub1);
+        u8g2.drawStr(35, 32, ub2);
+        u8g2.drawStr(67, 32, ub3);
+        u8g2.drawStr(99, 32, ub4);
         
       } while ( u8g2.nextPage() );
       if (buttonState_3 == HIGH & (millis()-startTime_4) > interval_4) {
@@ -678,20 +698,21 @@ void loop() {
     if(button_cont_2 == 4){
       u8g2.firstPage();
       do {
-        u8g2.drawStr(20,20,"Set Point");
-        u8g2.drawStr(0, 59, "b1");
-        u8g2.drawStr(32, 59, "b2");
-        u8g2.drawStr(64, 59, "b3");
-        u8g2.drawStr(96, 59, "B4");
-        u8g2.drawFrame(0, 24, 20, 20);
-        u8g2.drawFrame(32, 24, 20, 20);
-        u8g2.drawFrame(64, 24, 20, 20);
-        u8g2.drawFrame(96, 24, 20, 20);
+        u8g2.drawStr(30,12,"Set Point");
+        u8g2.drawStr(0, 51, "b1");
+        u8g2.drawStr(32, 51, "b2");
+        u8g2.drawStr(64, 51, "b3");
+        u8g2.drawStr(96, 51, "B4");
+        u8g2.drawFrame(96, 53,20, 3);
+        u8g2.drawFrame(0, 16, 20, 20);
+        u8g2.drawFrame(32, 16, 20, 20);
+        u8g2.drawFrame(64, 16, 20, 20);
+        u8g2.drawFrame(96, 16, 20, 20);
         itoa(cont_bat4,ub4,10);
-        u8g2.drawStr(3, 40, ub1);
-        u8g2.drawStr(35, 40, ub2);
-        u8g2.drawStr(67, 40, ub3);
-        u8g2.drawStr(99, 40, ub4);
+        u8g2.drawStr(3, 32, ub1);
+        u8g2.drawStr(35, 32, ub2);
+        u8g2.drawStr(67, 32, ub3);
+        u8g2.drawStr(99, 32, ub4);
         
       } while ( u8g2.nextPage() );
       if (buttonState_3 == HIGH & (millis()-startTime_4) > interval_4) {
