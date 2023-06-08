@@ -28,6 +28,7 @@ char ub1[10];
 char ub2[10];
 char ub3[10];
 char ub4[10];
+char prueba[10];
 
 const int button_1 = 34; // the number of the pushbutton pin
 const int button_2 = 35;
