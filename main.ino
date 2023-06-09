@@ -1,4 +1,4 @@
-#include <Arduino.h>
+ #include <Arduino.h>
 #include <U8g2lib.h>
 #include <string.h>
 #ifdef U8X8_HAVE_HW_SPI
@@ -33,6 +33,8 @@ const int button_1 = 34; // the number of the pushbutton pin
 const int button_2 = 35;
 const int button_3 = 25;
 const int button_4 = 26;
+const int led = 23;
+
 
 int battery_f1 = 4;
 int battery_f2 = 2;
@@ -62,6 +64,7 @@ int progress = 0;
 
 
 bool updating = false;  // Variable auxiliar - Activa el Updating 
+bool wifi_status = true;
 
 unsigned long startTime_1;
 unsigned long interval_1 = 500;
@@ -74,6 +77,15 @@ unsigned long interval_3 = 500;
 
 unsigned long startTime_4;
 unsigned long interval_4 = 500;
+
+//errors
+bool BMS = true;
+bool percent_miss = true;
+bool  cero = true;
+
+int x_str = 20;
+int y_str = 40;
+
 
 //unsigned long time_end;
 //unsigned long time_count;
@@ -481,7 +493,6 @@ const unsigned char Page_3_2 [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-//Borrar esto .|.
 
 void setup() {
   
@@ -500,7 +511,7 @@ void setup() {
   pinMode(button_2, INPUT);
   pinMode(button_3, INPUT);
   pinMode(button_4, INPUT);
-
+  pinMode(led, OUTPUT);
   u8g2.setFont(u8g2_font_ncenB10_tr);
   u8g2.begin();
 
@@ -629,6 +640,9 @@ void loop() {
       if(cont_bat1>100){
         cont_bat1=0;
       }
+      if(cont_bat1<0){
+        cont_bat1=0;
+      }
     }
 
     if(button_cont_2 == 2){
@@ -660,6 +674,9 @@ void loop() {
         startTime_4 = millis();
       }
       if(cont_bat2>100){
+        cont_bat2=0;
+      }
+      if(cont_bat2<0){
         cont_bat2=0;
       }
     }
@@ -694,6 +711,9 @@ void loop() {
       if(cont_bat3>100){
         cont_bat3=0;
       }
+      if(cont_bat3<0){
+        cont_bat3=0;
+      }
     }
     if(button_cont_2 == 4){
       u8g2.firstPage();
@@ -724,6 +744,9 @@ void loop() {
         startTime_4 = millis();
       }
       if(cont_bat4>100){
+        cont_bat4=0;
+      }
+      if(cont_bat4<0){
         cont_bat4=0;
       }
 
@@ -764,8 +787,105 @@ void loop() {
     }
     
   }  
+  
+  if(button_cont_1 == 4){
+    u8g2.firstPage();
+      do {
+        u8g2.drawStr(50,12,"Status");
+        if(BMS ){
+          digitalWrite(led,HIGH);
+          Serial.println("led ON");
+          
+        }
+        if(cero){
+          u8g2.drawStr(x_str, y_str, "0% error");
 
-  if (button_cont_1 > 3){ //Reinicio del contador para entrar a las pages
+        }
+        if(y_str > 50){
+          y_str = 10;
+        }
+
+        if(wifi_status){
+          u8g2.drawPixel(120, 8);
+          u8g2.drawPixel(120, 9);
+          u8g2.drawPixel(118, 7);
+          u8g2.drawPixel(119, 6);
+          u8g2.drawPixel(120, 6);
+          u8g2.drawPixel(121, 6);
+          u8g2.drawPixel(122, 7);
+          u8g2.drawPixel(116, 5);
+          u8g2.drawPixel(117, 4);
+          u8g2.drawPixel(118, 4);
+          u8g2.drawPixel(119, 4);
+          u8g2.drawPixel(120, 4);
+          u8g2.drawPixel(121, 4);
+          u8g2.drawPixel(122, 4);
+          u8g2.drawPixel(123, 4);
+          u8g2.drawPixel(124, 5);
+          u8g2.drawPixel(114, 3);
+          u8g2.drawPixel(115, 2);
+          u8g2.drawPixel(116, 2);
+          u8g2.drawPixel(117, 2);
+          u8g2.drawPixel(118, 2);
+          u8g2.drawPixel(119, 2);
+          u8g2.drawPixel(120, 2);
+          u8g2.drawPixel(121, 2);
+          u8g2.drawPixel(122, 2);
+          u8g2.drawPixel(123, 2);
+          u8g2.drawPixel(124, 2);
+          u8g2.drawPixel(125, 2);
+          u8g2.drawPixel(126, 3);
+          
+        }else{
+          u8g2.drawPixel(120, 8);
+          u8g2.drawPixel(120, 9);
+          u8g2.drawPixel(118, 7);
+          u8g2.drawPixel(119, 6);
+          u8g2.drawPixel(120, 6);
+          u8g2.drawPixel(121, 6);
+          u8g2.drawPixel(122, 7);
+          u8g2.drawPixel(116, 5);
+          u8g2.drawPixel(117, 4);
+          u8g2.drawPixel(118, 4);
+          u8g2.drawPixel(119, 4);
+          u8g2.drawPixel(120, 4);
+          u8g2.drawPixel(121, 4);
+          u8g2.drawPixel(122, 4);
+          u8g2.drawPixel(123, 4);
+          u8g2.drawPixel(124, 5);
+          u8g2.drawPixel(114, 3);
+          u8g2.drawPixel(115, 2);
+          u8g2.drawPixel(116, 2);
+          u8g2.drawPixel(117, 2);
+          u8g2.drawPixel(118, 2);
+          u8g2.drawPixel(119, 2);
+          u8g2.drawPixel(120, 2);
+          u8g2.drawPixel(121, 2);
+          u8g2.drawPixel(122, 2);
+          u8g2.drawPixel(123, 2);
+          u8g2.drawPixel(124, 2);
+          u8g2.drawPixel(125, 2);
+          u8g2.drawPixel(126, 3);
+          u8g2.drawLine(128, 1, 115, 8);
+        }
+      } while ( u8g2.nextPage() );
+      
+      }
+      //Los siguientes son condicionales para suponer aparición de errores.    
+      if(buttonState_3==HIGH){
+        BMS=true;
+      }
+      if(buttonState_3==LOW){
+        BMS=false;
+      }
+      if(buttonState_4==HIGH){
+        cero=true;
+      }
+      if(buttonState_4==LOW){
+        cero=false;
+      }
+
+  if (button_cont_1 > 4){ //Reinicio del contador para entrar a las pages
     button_cont_1 = 1;
   }
 
