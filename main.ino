@@ -892,5 +892,6 @@ void loop() {
   display.display(); //Una unica impresion de la pantalla
 
 }
+//HOLA JOSe
 
  
